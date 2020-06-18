@@ -1,0 +1,17 @@
+$green: rgb(121, 242, 157);
+.app {
+  min-height: 100vh;
+  position: relative;
+  .container {
+    padding: 0 16px;
+  }
+  .title {
+    background: $green;
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
+

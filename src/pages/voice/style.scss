@@ -1,0 +1,30 @@
+.controls {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 80px;
+
+    .voice-btn {
+        width:  30vw;
+        height: 30vw;
+        display: flex;
+        margin-top: 20px;
+        background: red;
+        border-radius: 50%;
+        border: 8px solid #fff;
+        box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+
+        .stop {
+            align-items: center;
+            justify-content: center;
+            background: red;
+            width:  20vw;
+            height: 20vw;
+            margin: 0 auto;
+        }
+    }
+
+}

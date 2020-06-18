@@ -1,0 +1,13 @@
+$green: rgb(121, 242, 157);
+.container {
+  padding: 0 16px;
+}
+.title {
+  background: $green;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
