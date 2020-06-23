@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
+import { history } from 'umi';
 import { TabBar } from 'antd-mobile';
+import '@/assets/font/iconfont.css';
+
+const routerJump = (path: string) => {
+    history.push(path)
+}
 
 export const MenuBar = () => {
-    const [selectedTab, setTab] = useState('redTab');
+    const [selectedTab, setTab] = useState('blueTab');
     const [hidden, setHidden] = useState(false);
 
     return (
@@ -14,67 +20,29 @@ export const MenuBar = () => {
                 hidden={hidden}
             >
                 <TabBar.Item
-                    title="Life"
-                    key="Life"
-                    icon={<div style={{
-                        width: '22px',
-                        height: '22px',
-                        background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat'
-                    }}
-                    />
-                    }
-                    selectedIcon={<div style={{
-                        width: '22px',
-                        height: '22px',
-                        background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat'
-                    }}
-                    />
-                    }
+                    title="Menu"
+                    key="Menu"
+                    icon={<i className="iconfont icon-mulu"></i>}
+                    selectedIcon={<i className="iconfont icon-mulu"></i>}
                     selected={selectedTab === 'blueTab'}
-                    badge={1}
                     onPress={() => {
                         setTab('blueTab');
+                        routerJump('/');
                     }}
                     data-seed="logId"
                 >
                 </TabBar.Item>
                 <TabBar.Item
-                    icon={
-                        <div style={{
-                            width: '22px',
-                            height: '22px',
-                            background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  21px 21px no-repeat'
-                        }}
-                        />
-                    }
-                    selectedIcon={
-                        <div style={{
-                            width: '22px',
-                            height: '22px',
-                            background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  21px 21px no-repeat'
-                        }}
-                        />
-                    }
-                    title="Friend"
-                    key="Friend"
-                    dot
-                    selected={selectedTab === 'greenTab'}
-                    onPress={() => {
-                        setTab('greenTab');
-                    }}
-                >
-                </TabBar.Item>
-                <TabBar.Item
-                    icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
-                    selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
-                    title="My"
+                    title="Mine"
                     key="my"
+                    icon={<i className="iconfont icon-icon_principal"></i>}
+                    selectedIcon={<i className="iconfont icon-icon_principal"></i>}
                     selected={selectedTab === 'yellowTab'}
                     onPress={() => {
                         setTab('yellowTab');
+                        routerJump('/mine');
                     }}
                 >
-                    {/* {this.renderContent('My')} */}
                 </TabBar.Item>
             </TabBar>
         </>
