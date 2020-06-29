@@ -2,8 +2,8 @@ import React from 'react';
 import { Stepper } from 'antd-mobile';
 import Recorder from 'recorder-core'
 import 'recorder-core/src/engine/mp3'
-import 'recorder-core/src/engine/mp3-engine'
-import '@/utils/waveview.js'
+import 'recorder-core/src/engine/wav'
+import 'recorder-core/src/extensions/waveview'
 import './style.scss'
 
 class Voice extends React.Component {
@@ -33,7 +33,7 @@ class Voice extends React.Component {
   public recOpen = (success: any) => {
     let wave:any;
     this.rec = Recorder({
-      type: "mp3",
+      type: "wav",
       sampleRate: 16000,
       bitRate: 16,
       onProcess: (buffers, powerLevel, bufferDuration, bufferSampleRate, newBufferIdx, asyncEnd) => { 
