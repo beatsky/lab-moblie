@@ -10,7 +10,7 @@ export default defineConfig({
   //   { path: '/', component: '@/pages/index' },
   // ],
   proxy: {
-    '/api': {
+    '/': {
       'target': 'http://www.yzstu.cn:8088/',
       'changeOrigin': true,
     },

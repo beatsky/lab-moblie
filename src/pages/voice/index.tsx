@@ -1,5 +1,6 @@
 import React from 'react';
 import { Stepper } from 'antd-mobile';
+import { uploadVoice } from '@/api/index';
 import Recorder from 'recorder-core'
 import 'recorder-core/src/engine/mp3'
 import 'recorder-core/src/engine/wav'
@@ -9,6 +10,7 @@ import './style.scss'
 class Voice extends React.Component {
   public rec: any
   public timer: any
+  public endTimer: any
   public state = {
     recordSecond: 30,
     count: 0,
@@ -56,12 +58,13 @@ class Voice extends React.Component {
 
   /**结束录音**/
   public recStop = () => {
+    clearTimeout(this.endTimer);
     this.rec.stop((blob: any, duration: any) => {
       console.log(blob, (window.URL || webkitURL).createObjectURL(blob), "时长:" + duration + "ms");
       this.rec.close();
       this.rec = null;
 
-      console.log(blob)
+      uploadVoice(blob)
 
       /*** 【立即播放例子】 ***/
       const audio=document.createElement("audio");
@@ -82,7 +85,7 @@ class Voice extends React.Component {
     this.timer = setInterval(() => {
       this.setState({ count: this.state.count + 1 });
     }, 1000);
-    setTimeout(() => {
+    this.endTimer = setTimeout(() => {
       this.setState({ recording: !this.state.recording });
       clearInterval(this.timer);
       this.recStop();

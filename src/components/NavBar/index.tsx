@@ -3,7 +3,7 @@ import { history } from 'umi';
 import { NavBar, Icon } from 'antd-mobile';
 
 export default () => {
-  const [value, setValue] = useState('美食');
+  const [value, setValue] = useState('');
   useEffect(() => {
     // this.autoFocusInst.focus();
   });
