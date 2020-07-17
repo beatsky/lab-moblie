@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stepper } from 'antd-mobile';
-import { uploadVoice } from '@/api/index';
+import { uploadVoice, getVoiceRes } from '@/api/index';
 import Recorder from 'recorder-core'
 import 'recorder-core/src/engine/mp3'
 import 'recorder-core/src/engine/wav'
@@ -15,6 +15,7 @@ class Voice extends React.Component {
     recordSecond: 30,
     count: 0,
     recording: false,
+    voiceResult: ''
   };
   public onChange = (recordSecond: number) => {
     this.setState({ recordSecond });
@@ -60,18 +61,19 @@ class Voice extends React.Component {
   public recStop = () => {
     clearTimeout(this.endTimer);
     this.rec.stop((blob: any, duration: any) => {
-      console.log(blob, (window.URL || webkitURL).createObjectURL(blob), "时长:" + duration + "ms");
+      // console.log(blob, (window.URL || webkitURL).createObjectURL(blob), "时长:" + duration + "ms");
       this.rec.close();
       this.rec = null;
 
       uploadVoice(blob)
+      this.getVoiceRes();
 
       /*** 【立即播放例子】 ***/
-      const audio=document.createElement("audio");
-      audio.controls=true;
-      document.body.appendChild(audio);
-      audio.src=(window.URL||webkitURL).createObjectURL(blob);
-      audio.play();
+      // const audio=document.createElement("audio");
+      // audio.controls=true;
+      // document.body.appendChild(audio);
+      // audio.src=(window.URL||webkitURL).createObjectURL(blob);
+      // audio.play();
     }, (msg: string) => {
       console.log("录音失败:" + msg);
       this.rec.close();
@@ -92,12 +94,26 @@ class Voice extends React.Component {
     }, this.state.recordSecond * 1000);
   }
 
+  public getVoiceRes = async () => {
+    console.log(111)
+    let timer = setInterval(async () => {
+      let voiceResult = await getVoiceRes();
+      if (Boolean(voiceResult)) {
+        clearInterval(timer);
+        this.setState({ voiceResult });
+      }
+    }, 2000)
+  }
+
   render() {
     return (
       <div>
         <div className="wave"></div>
         <div className="time">
           {this.state.count}
+        </div>
+        <div className="time">
+          {this.state.voiceResult}
         </div>
         <div className="controls">
           <Stepper
